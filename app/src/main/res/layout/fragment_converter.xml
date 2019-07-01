@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="currencyRatesViewModel"
+                  type="pl.revolut.test.converter.viewmodels.CurrencyRatesViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/currencies_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingLeft="@dimen/vertical_padding"
+                android:paddingRight="@dimen/vertical_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:context=".MainActivity"
+                tools:listitem="@layout/item_currency"/>
+
+        <LinearLayout isVisible='@{safeUnbox(currencyRatesViewModel.error)}'
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="@dimen/margin_default"
+                      android:background="@color/error"
+                      app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView android:textColor="@color/onError"
+                      android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/connection_error"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
